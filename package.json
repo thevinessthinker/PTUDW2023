@@ -1,7 +1,7 @@
 {
   "name": "ptudw2023",
   "version": "1.0.0",
-  "description": "",
+  "description": "Đồ án quản lý bán hàng",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
