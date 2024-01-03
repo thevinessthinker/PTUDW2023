@@ -9,8 +9,8 @@ class Account {
         name,
         dob,
         role,
-        createdAt,
-        updatedAt,
+        created_at,
+        updated_at,
     }) {
         this.self = {
             id,
@@ -20,8 +20,8 @@ class Account {
             name,
             dob,
             role,
-            createdAt,
-            updatedAt,
+            createdAt: created_at,
+            updatedAt: updated_at,
         };
     }
     withUsername(username) {

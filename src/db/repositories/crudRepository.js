@@ -1,3 +1,5 @@
+const removeUndefinedProperties = require('../../utils/removeUndefinedProperties');
+
 class CrudRepository {
     constructor(db, pgp, tableName, createColumnsets) {
         this.db = db;
@@ -39,11 +41,38 @@ class CrudRepository {
         );
     }
     save(entity) {
-        return this.db.one(
-            this.pgp.helpers.insert(entity, null, this.tableName) +
-                ' RETURNING id',
-        );
+        const transformedEntity = transformEntity(entity);
+
+        const query =
+            this.pgp.helpers.insert(transformedEntity, null, this.tableName) +
+            ' RETURNING id';
+
+        return this.db.one(query);
     }
+    update(entity) {
+        const transformedEntity = transformEntity(entity);
+
+        const query =
+            this.pgp.helpers.update(transformedEntity, null, this.tableName) +
+            ' WHERE id = $1 RETURNING id';
+        return this.db.one(query, [transformedEntity.id]);
+    }
+}
+
+function transformEntity(entity) {
+    const transformedEntity = { ...entity.self };
+
+    if (transformedEntity.createdAt) {
+        transformedEntity.created_at = transformedEntity.createdAt;
+        delete transformedEntity.createdAt;
+    }
+
+    if (transformedEntity.updatedAt) {
+        transformedEntity.updated_at = transformedEntity.updatedAt;
+        delete transformedEntity.updatedAt;
+    }
+
+    return removeUndefinedProperties(transformedEntity);
 }
 
 module.exports = CrudRepository;
