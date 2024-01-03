@@ -26,15 +26,19 @@ class Account {
     }
     withUsername(username) {
         this.self.username = username;
+        return this;
     }
     withPassword(password) {
         this.self.password = password;
+        return this;
     }
     withEmail(email) {
         this.self.email = email;
+        return this;
     }
     withRole(role) {
         this.self.role = role;
+        return this;
     }
     build() {
         return this;
