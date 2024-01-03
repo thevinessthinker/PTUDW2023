@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS product_types (
 );
 
 CREATE TABLE IF NOT EXISTS product_details (
+	id SERIAL PRIMARY KEY,
 	product_id INT REFERENCES products(id),
 	category_id INT REFERENCES categories(id),
 	type_id INT REFERENCES product_types(id),
