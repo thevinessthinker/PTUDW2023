@@ -4,6 +4,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const { CONNECT_DB } = require('./config/db');
+const routes = require('./routes');
 
 const START_SERVER = () => {
     const app = express();
@@ -12,9 +13,9 @@ const START_SERVER = () => {
     app.use('/static', express.static('src/public'));
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
-    app.get('/', (req, res) => {
-        res.send('Hello world');
-    });
+    app.use('/', routes);
+
+    // error handlers
 
     const server = https.createServer(
         {

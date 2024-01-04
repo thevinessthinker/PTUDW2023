@@ -1,10 +1,10 @@
 const env = require('./environment');
-//const { UserRepository } = require('../db/repositories');
+const { AccountRepository } = require('../db/repositories');
 
 const initOptions = {
     capSQL: true,
     extend(obj, dc) {
-        //obj.userRepository = new UserRepository(obj, pgp);
+        obj.accountRepository = new AccountRepository(obj, pgp);
     },
 };
 
