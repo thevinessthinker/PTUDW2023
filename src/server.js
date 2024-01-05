@@ -5,6 +5,10 @@ const fs = require('fs');
 const path = require('path');
 const { CONNECT_DB } = require('./config/db');
 const routes = require('./routes');
+const catchAllErrorHandler = require('./middlewares/errors/catchAllErrorHandler');
+const pageNotFoundHandler = require('./middlewares/errors/404ErrorHandler');
+const errorLogger = require('./middlewares/errors/errorLogger');
+const clientErrorHandler = require('./middlewares/errors/clientErrorHandler');
 
 const START_SERVER = () => {
     const app = express();
@@ -15,7 +19,10 @@ const START_SERVER = () => {
     app.use(express.urlencoded({ extended: true }));
     app.use('/', routes);
 
-    // error handlers
+    app.use(pageNotFoundHandler);
+    app.use(errorLogger);
+    app.use(clientErrorHandler);
+    app.use(catchAllErrorHandler);
 
     const server = https.createServer(
         {
