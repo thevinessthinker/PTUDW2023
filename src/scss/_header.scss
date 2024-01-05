@@ -1,0 +1,27 @@
+@import 'variables';
+
+.navbar {
+    .container-fluid {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+
+.main-search {
+    width: 600px;
+    height: 38px;
+
+    button {
+        width: 92px;
+        font-size: smaller;
+        position: relative;
+        right: 90px;
+        color: $primaryColor;
+        background-color: $secondaryColor;
+
+       &:hover, &:active {
+        color: $primaryColor !important;
+        background-color: $secondaryColor !important;
+       }
+    }
+}
