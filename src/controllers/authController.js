@@ -16,8 +16,6 @@ const signupForm = (req, res) => {
 };
 const signup = async (req, res, next) => {
     console.log('Go to AuthController: SignUp');
-    // invoke signup service
-
     try {
         const { username, password, email, name } = req.body;
         await authService.signup(username, password, email, name);

@@ -17,8 +17,8 @@ const signup = async (req, res, next) => {
             message: 'Username is required',
         },
         {
-            condition: username.length < 5 || username.length > 30,
-            message: 'Username must be between 5 and 30 characters',
+            condition: username.length < 6 || username.length > 30,
+            message: 'Username must be between 6 and 30 characters',
         },
         {
             condition: !allowedCharactersRegex.test(username),
