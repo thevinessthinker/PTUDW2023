@@ -1,10 +1,15 @@
 const env = require('./environment');
 const { AccountRepository } = require('../db/repositories');
+const { VerificationTokenRepository } = require('../db/repositories');
 
 const initOptions = {
     capSQL: true,
     extend(obj, dc) {
         obj.accountRepository = new AccountRepository(obj, pgp);
+        obj.verificationTokenRepository = new VerificationTokenRepository(
+            obj,
+            pgp,
+        );
     },
 };
 
