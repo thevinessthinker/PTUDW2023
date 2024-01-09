@@ -1,0 +1,17 @@
+<div class="d-flex justify-content-center align-items-center">
+    <div class="registration-form text-center">
+        <h4 class="form-title alert alert-{{status}}" role="alert">Xác nhận email</h4>
+        {{#if isSuccess}}
+        <h5>Xác nhận thành công</h5>
+        <a class="btn btn-primary" href="/auth/login">Quay lại đăng nhập</a>
+        {{else}}
+        {{#if isWarning}}
+        <h5>Không còn hiệu lực</h5>
+        <a class="btn btn-secondary" href="#">Gửi lại xác nhận email</a>
+        {{else}}
+        <h5>Có gì đó không đúng</h5>
+        <a class="btn btn-secondary" href="/auth/signup">Đăng ký lại</a>
+        {{/if}}
+        {{/if}}
+    </div>
+</div>

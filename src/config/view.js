@@ -1,4 +1,5 @@
 const { create } = require('express-handlebars');
+const handlebars = require('handlebars');
 const path = require('path');
 
 module.exports = (app) => {
@@ -12,4 +13,8 @@ module.exports = (app) => {
     app.engine('hbs', exphbs.engine);
     app.set('view engine', 'hbs');
     app.set('views', path.join(__dirname, '../views'));
+
+    handlebars.registerHelper('ifEquals', function (key, value, options) {
+        return key == value ? options.fn(this) : options.inverse(this);
+    });
 };

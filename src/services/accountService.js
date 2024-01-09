@@ -13,14 +13,15 @@ const existsByUsername = async (username) => {
 
 const create = async (username, password, email, name) => {
     try {
-        const acc = Account.builder()
-            .withUsername(username)
-            .withPassword(password)
-            .withEmail(email)
-            .withRole(Roles.USER)
-            .build();
-        const savedUser = await db.accountRepository.save(acc);
-        return savedUser;
+        const account = new Account({
+            username,
+            password,
+            email,
+            name,
+            role: Roles.USER,
+        });
+        const savedAccount = await db.accountRepository.save(account);
+        return savedAccount;
     } catch (err) {
         throw err;
     }

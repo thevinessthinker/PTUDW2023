@@ -9,6 +9,8 @@ const env = {
     DB_USERNAME: process.env.DB_USERNAME,
     DB_PASSWORD: process.env.DB_PASSWORD,
     BUILD_MODE: process.env.BUILD_MODE,
+    NODEMAILER_USER: process.env.NODEMAILER_USER,
+    NODEMAILER_PASSWORD: process.env.NODEMAILER_PASSWORD,
 };
 
 module.exports = env;

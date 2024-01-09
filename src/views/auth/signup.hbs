@@ -2,6 +2,7 @@
     <div class="registration-form">
         <h4 class="form-title">Đăng ký</h4>
 
+        {{#if isSignUp}}
         <form id="signupForm" method="post" action="/auth/signup" novalidate>
             <div class="mb-3">
                 <input type="text" class="form-control" id="username" name="username" placeholder="Tên tài khoản"
@@ -45,7 +46,25 @@
             </div>
 
             <button class="btn btn-primary" id="signupBtn">Đăng ký</button>
+
+            <div class="divider d-flex align-items-center my-4">
+                <p class="text-center small mx-3 mb-0 text-muted">HOẶC</p>
+            </div>
+
+            <p id="login-link">Bạn đã có tài khoản?
+                <a href="/auth/login">
+                    Đăng nhập
+                </a>
+            </p>
         </form>
+
+        {{else}}
+        <div class="alert alert-success" role="alert">
+            Chúng tôi đã gửi thông tin xác nhận đăng ký tài khoản thông qua <b>{{email}}</b>. Vui lòng xác
+            nhận nhanh chóng.
+        </div>
+
+        {{/if}}
     </div>
 </div>
 
@@ -72,20 +91,26 @@
         $(inputField).attr('type', newType);
     }
     function signup() {
-        const usernameField = $('#username');
-        const passwordField = $("#password");
-        const confirmPasswordField = $('#confirmPassword');
-        const emailField = $('#email');
-        const nameField = $('#name');
-        const allowedCharactersRegex = /^[a-zA-Z0-9.]+$/;
-        const emailRegex =
-            /^[a-zA-Z0-9_+&*-]+(?:\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
-        const onlyNumbersRegex = /^\d+$/;
-        const usernameFeedback = $('#username-feedback');
-        const passwordFeedback = $('#password-feedback');
-        const confirmPasswordFeedback = $('#confirm-password-feedback');
-        const emailFeedback = $('#email-feedback');
-        const nameFeedback = $('#name-feedback');
+        const fields = {
+            username: $('#username'),
+            password: $('#password'),
+            confirmPassword: $('#confirmPassword'),
+            email: $('#email'),
+            name: $('#name')
+        }
+        const feedbacks = {
+            username: $('#username-feedback'),
+            password: $('#password-feedback'),
+            confirmPassword: $('#confirm-password-feedback'),
+            email: $('#email-feedback'),
+            name: $('#name-feedback')
+        }
+        const regex = {
+            allowedCharacters: /^[a-zA-Z0-9.]+$/,
+            email: /^[a-zA-Z0-9_+&*-]+(?:\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/,
+            onlyNumber: /^\d+$/
+        }
+
         const state = {
             username: {
                 isValid: true,
@@ -108,19 +133,18 @@
                 message: ''
             },
         }
+
         $('#signupForm').submit(function (event) {
             event.preventDefault();
             event.stopPropagation();
 
             const formData = {
-                username: usernameField.val(),
-                password: passwordField.val(),
-                confirmPassword: confirmPasswordField.val(),
-                email: emailField.val(),
-                name: nameField.val()
+                username: fields.username.val(),
+                password: fields.password.val(),
+                confirmPassword: fields.confirmPassword.val(),
+                email: fields.email.val(),
+                name: fields.name.val()
             };
-
-
 
             ////////////// Username
             if (!formData.username) {
@@ -129,10 +153,10 @@
             } else if (formData.username.length < 6 || formData.username.length > 30) {
                 state.username.isValid = false;
                 state.username.message = 'Xin lỗi, tên người dùng của bạn phải nằm trong khoảng độ dài từ giữa 6 và 30 ký tự';
-            } else if (!allowedCharactersRegex.test(formData.username)) {
+            } else if (!regex.allowedCharacters.test(formData.username)) {
                 state.username.isValid = false;
                 state.username.message = 'Xin lỗi, chỉ được phép sử dụng các chữ cái (a-z), số và dấu chấm.';
-            } else if (onlyNumbersRegex.test(formData.username)) {
+            } else if (regex.onlyNumber.test(formData.username)) {
                 state.username.isValid = false;
                 state.username.message = 'Xin lỗi, tên người dùng phải có từ 8 ký tự trở lên và phải bao gồm ít nhất một chữ cái (a-z)';
             }
@@ -151,12 +175,12 @@
 
                         // update state
                         if (state.username.isValid === false) {
-                            usernameField.addClass('is-invalid');
-                            usernameFeedback.text(state.username.message);
+                            fields.username.addClass('is-invalid');
+                            feedbacks.username.text(state.username.message);
                         } else {
-                            usernameField.addClass('is-valid');
-                            usernameField.removeClass('is-invalid');
-                            usernameFeedback.text('');
+                            fields.username.addClass('is-valid');
+                            fields.username.removeClass('is-invalid');
+                            feedbacks.username.text('');
                         }
                     })
                     .fail((err) => {
@@ -165,12 +189,12 @@
 
                         // update state
                         if (state.username.isValid === false) {
-                            usernameField.addClass('is-invalid');
-                            usernameFeedback.text(state.username.message);
+                            fields.username.addClass('is-invalid');
+                            feedbacks.username.text(state.username.message);
                         } else {
-                            usernameField.addClass('is-valid');
-                            usernameField.removeClass('is-invalid');
-                            usernameFeedback.text('');
+                            fields.username.addClass('is-valid');
+                            fields.username.removeClass('is-invalid');
+                            feedbacks.username.text('');
                         }
                     });
             }
@@ -201,7 +225,7 @@
             if (!formData.email) {
                 state.email.isValid = false;
                 state.email.message = 'Nhập email';
-            } else if (!emailRegex.test(formData.email)) {
+            } else if (!regex.email.test(formData.email)) {
                 state.email.isValid = false;
                 state.email.message = 'Địa chỉ email không hợp lệ';
             } else {
@@ -219,48 +243,48 @@
 
             // update state
             if (state.username.isValid === false) {
-                usernameField.addClass('is-invalid');
-                usernameFeedback.text(state.username.message);
+                fields.username.addClass('is-invalid');
+                feedbacks.username.text(state.username.message);
             } else {
-                usernameField.addClass('is-valid');
-                usernameField.removeClass('is-invalid');
-                usernameFeedback.text('');
+                fields.username.addClass('is-valid');
+                fields.username.removeClass('is-invalid');
+                feedbacks.username.text('');
             }
 
             if (state.password.isValid === false) {
-                passwordField.addClass('is-invalid');
-                passwordFeedback.text(state.password.message);
+                fields.password.addClass('is-invalid');
+                feedbacks.password.text(state.password.message);
             } else {
-                passwordField.addClass('is-valid');
-                passwordField.removeClass('is-invalid');
-                passwordFeedback.text('');
+                fields.password.addClass('is-valid');
+                fields.password.removeClass('is-invalid');
+                feedbacks.password.text('');
             }
 
             if (state.confirmPassword.isValid === false) {
-                confirmPasswordField.addClass('is-invalid');
-                confirmPasswordFeedback.text(state.confirmPassword.message);
+                fields.confirmPassword.addClass('is-invalid');
+                feedbacks.confirmPassword.text(state.confirmPassword.message);
             } else {
-                confirmPasswordField.addClass('is-valid');
-                confirmPasswordField.removeClass('is-invalid');
-                confirmPasswordFeedback.text('');
+                fields.confirmPassword.addClass('is-valid');
+                fields.confirmPassword.removeClass('is-invalid');
+                feedbacks.confirmPassword.text('');
             }
 
             if (state.email.isValid === false) {
-                emailField.addClass('is-invalid');
-                emailFeedback.text(state.email.message);
+                fields.email.addClass('is-invalid');
+                feedbacks.email.text(state.email.message);
             } else {
-                emailField.addClass('is-valid');
-                emailField.removeClass('is-invalid');
-                emailFeedback.text('');
+                fields.email.addClass('is-valid');
+                fields.email.removeClass('is-invalid');
+                feedbacks.email.text('');
             }
 
             if (state.name.isValid === false) {
-                nameField.addClass('is-invalid');
-                nameFeedback.text(state.name.message);
+                fields.name.addClass('is-invalid');
+                feedbacks.name.text(state.name.message);
             } else {
-                nameField.addClass('is-valid');
-                nameField.removeClass('is-invalid');
-                nameFeedback.text('');
+                fields.name.addClass('is-valid');
+                fields.name.removeClass('is-invalid');
+                feedbacks.name.text('');
             }
 
             // Submit

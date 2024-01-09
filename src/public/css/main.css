@@ -45,6 +45,19 @@ main {
 .registration-form button {
   width: 100%;
 }
+.registration-form .divider:after,
+.registration-form .divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+.registration-form #login-link {
+  text-align: center;
+}
+.registration-form #login-link a {
+  text-decoration: none;
+}
 
 .login-form {
   padding: 30px;
@@ -76,6 +89,20 @@ main {
   flex: 1;
   height: 1px;
   background: #eee;
+}
+
+.email-confirmation {
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 4px;
+  width: 35%;
+}
+.email-confirmation .form-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.email-confirmation a {
+  width: 100%;
 }
 
 .wrap-error {
