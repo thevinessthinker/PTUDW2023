@@ -120,4 +120,17 @@ ON order_details
 FOR EACH ROW
 EXECUTE FUNCTION updated_at_func();
 
+-- Verson 2 
+ALTER TABLE accounts
+ADD COLUMN enabled BOOLEAN DEFAULT FALSE;
+
+CREATE TABLE IF NOT EXISTS verification_tokens (
+	id SERIAL PRIMARY KEY,
+	token TEXT NOT NULL,
+	account_id UUID NOT NULL REFERENCES accounts(id),
+	expiry_date TIMESTAMP,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- END
