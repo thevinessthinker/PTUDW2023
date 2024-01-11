@@ -22,7 +22,7 @@ const signup = async (username, password, email, name) => {
             throw new AppError(
                 StatusCodes.INTERNAL_SERVER_ERROR,
                 ReasonPhrases.INTERNAL_SERVER_ERROR,
-                'Reigstration failed. Please try again',
+                'Registration failed. Please try again',
             );
         }
 
@@ -141,7 +141,7 @@ const validateVerificationToken = async (token) => {
 
         const currentDate = new Date();
         const expiryDate = storedToken.expiry_date;
-        console.log(expiryDate);
+
         if (currentDate.getTime() >= expiryDate.getTime()) {
             await db.verificationTokenRepository.delete(storedToken);
             return 'expired';
@@ -159,8 +159,41 @@ const validateVerificationToken = async (token) => {
     }
 };
 
+const login = async (loginKey, password) => {
+    // 1. check login type
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[0-9]{10}$/;
+    let loginType;
+    if (emailRegex.test(loginKey)) {
+        loginType = 'email';
+    } else if (phoneRegex.test(loginKey)) {
+        loginType = 'phone';
+    } else {
+        loginType = 'username';
+    }
+
+    let fetchedAccount;
+    if (loginType === 'username') {
+        fetchedAccount = await accountService.getAccountByUsername(loginKey);
+    } else if (loginType === 'email') {
+        fetchedAccount = await accountService.getAccountByEmail(loginKey);
+    }
+
+    if (!fetchedAccount) {
+        throw new AppError(
+            StatusCodes.INTERNAL_SERVER_ERROR,
+            ReasonPhrases.INTERNAL_SERVER_ERROR,
+            'Login failed. Please try again',
+        );
+    }
+    const fetchedPassword = fetchedAccount.password;
+    const isMatch = await passwordEncoder.matches(password, fetchedPassword);
+    return isMatch ? fetchedAccount : null;
+};
+
 module.exports = {
     signup,
     getVerificationToken,
     validateVerificationToken,
+    login,
 };

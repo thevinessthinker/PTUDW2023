@@ -1,10 +1,24 @@
 const authService = require('../services/authService');
+const passport = require('passport');
 
 const loginForm = (req, res) => {
+    const errorMessages = req.flash('error');
+    const hasError = errorMessages.length > 0;
+    if (hasError) {
+        errorMessages[0] = 'Thông tin đăng nhập không đúng';
+    }
+
     res.render('auth/login', {
         header: false,
+        hasError,
+        errorMessage: errorMessages[0],
     });
 };
+const login = passport.authenticate('myStrategy', {
+    successRedirect: '/',
+    failureRedirect: '/auth/login',
+    failureFlash: true,
+});
 
 const signupForm = (req, res) => {
     res.render('auth/signup', {
@@ -27,7 +41,6 @@ const signup = async (req, res, next) => {
         next(err);
     }
 };
-
 const handleEmailConfirmation = async (req, res) => {
     const { token } = req.query;
     console.log('go to handle email confirmation');
@@ -63,6 +76,7 @@ const handleEmailConfirmation = async (req, res) => {
 
 module.exports = {
     loginForm,
+    login,
     signupForm,
     signup,
     handleEmailConfirmation,

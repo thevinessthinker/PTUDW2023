@@ -11,6 +11,7 @@ const env = {
     BUILD_MODE: process.env.BUILD_MODE,
     NODEMAILER_USER: process.env.NODEMAILER_USER,
     NODEMAILER_PASSWORD: process.env.NODEMAILER_PASSWORD,
+    SESSION_SECRET_KEY: process.env.SESSION_SECRET_KEY,
 };
 
 module.exports = env;

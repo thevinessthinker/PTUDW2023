@@ -27,7 +27,26 @@ const create = async (username, password, email, name) => {
     }
 };
 
+const getAccountByUsername = async (username) => {
+    try {
+        const rs = await db.accountRepository.findByUsername(username);
+        return rs;
+    } catch (err) {
+        throw err;
+    }
+};
+const getAccountByEmail = async (email) => {
+    try {
+        const rs = await db.accountRepository.findByEmail(email);
+        return rs;
+    } catch (err) {
+        throw err;
+    }
+};
+
 module.exports = {
     existsByUsername,
+    getAccountByUsername,
     create,
+    getAccountByEmail,
 };

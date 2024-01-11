@@ -9,16 +9,33 @@ const catchAllErrorHandler = require('./middlewares/errors/catchAllErrorHandler'
 const pageNotFoundHandler = require('./middlewares/errors/404ErrorHandler');
 const errorLogger = require('./middlewares/errors/errorLogger');
 const clientErrorHandler = require('./middlewares/errors/clientErrorHandler');
+const passport = require('./config/passport');
+const session = require('express-session');
+const view = require('./config/view');
+const flash = require('connect-flash');
 
 const START_SERVER = () => {
     const app = express();
 
-    require('./config/view')(app);
+    view(app);
     app.use('/static', express.static('src/public'));
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
-    app.use('/', routes);
+    app.use(
+        session({
+            secret: env.SESSION_SECRET_KEY,
+            saveUninitialized: false,
+            resave: false,
+            cookie: {
+                maxAge: 24 * 60 * 60 * 1000,
+                secure: false,
+            },
+        }),
+    );
+    app.use(flash());
+    passport(app);
 
+    app.use('/', routes);
     app.use(pageNotFoundHandler);
     app.use(errorLogger);
     app.use(clientErrorHandler);
