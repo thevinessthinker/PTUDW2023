@@ -43,10 +43,19 @@ const getAccountByEmail = async (email) => {
         throw err;
     }
 };
+const updateAccount = async (account) => {
+    try {
+        const updatedAccount = await db.accountRepository.update(account);
+        return updatedAccount;
+    } catch (err) {
+        throw err;
+    }
+};
 
 module.exports = {
     existsByUsername,
     getAccountByUsername,
     create,
     getAccountByEmail,
+    updateAccount,
 };

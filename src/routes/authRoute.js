@@ -11,5 +11,11 @@ Router.route('/signup')
 Router.route('/signup/email-confirmation').get(
     authController.handleEmailConfirmation,
 );
+Router.route('/signup/google').post(
+    authValidation.signUpWithGoogle,
+    authController.signUpWithGoogle,
+);
+Router.route('/google').get(authController.loginWithGoogle);
+Router.route('/google/callback').get(authController.loginWithGoogleCallback);
 
 module.exports = Router;
