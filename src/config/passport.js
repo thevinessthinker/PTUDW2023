@@ -12,9 +12,11 @@ passport.deserializeUser(async (username, done) => {
         const fetchedAccount = await accountService.getAccountByUsername(
             username,
         );
-        if (!fetchedAccount) {
+
+        if (!fetchedAccount || !fetchedAccount.enabled) {
             return done(null, false);
         }
+
         done(null, fetchedAccount);
     } catch (error) {
         done(error);
