@@ -3,7 +3,6 @@ const { StatusCodes, ReasonPhrases } = require('http-status-codes');
 const { existsByUsername } = require('../services/accountService');
 
 const signup = async (req, res, next) => {
-    console.log('Go to AuthValidation: SignUp');
     const { username, password, confirmPassword, email, name } = req.body;
     const allowedCharactersRegex = /^[a-zA-Z0-9.]+$/;
     const onlyNumbersRegex = /^\d+$/;
@@ -93,6 +92,47 @@ const signup = async (req, res, next) => {
     next();
 };
 
+const signUpWithGoogle = (req, res, next) => {
+    const { email, password, confirmPassword } = req.body;
+
+    const passwordRules = [
+        {
+            condition: password.length < 8,
+            message: 'Password must be at least 8 characters long',
+        },
+        {
+            condition: confirmPassword.length === 0,
+            message: 'Confirm password is required',
+        },
+        {
+            condition: confirmPassword !== password,
+            message:
+                'The confirmed password does not match the original password',
+        },
+    ];
+
+    const rules = [
+        {
+            condition: !password || !confirmPassword,
+            message: 'Something went sideways',
+        },
+        ...passwordRules,
+    ];
+
+    for (const rule of rules) {
+        if (rule.condition) {
+            return next(
+                new AppError(
+                    StatusCodes.UNPROCESSABLE_ENTITY,
+                    ReasonPhrases.UNPROCESSABLE_ENTITY,
+                    rule.message,
+                ),
+            );
+        }
+    }
+    next();
+};
+
 const checkUsernameExists = async (username) => {
     try {
         const rs = await existsByUsername(username);
@@ -104,4 +144,5 @@ const checkUsernameExists = async (username) => {
 
 module.exports = {
     signup,
+    signUpWithGoogle,
 };

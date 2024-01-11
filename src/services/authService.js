@@ -7,6 +7,7 @@ const { randomUUID } = require('crypto');
 const Account = require('../models/accountModel');
 const VerificationToken = require('../models/verificationTokenModel');
 const EXPIRATION = 60 * 24; // one day
+const generateUsername = require('../utils/generateUsername');
 
 const signup = async (username, password, email, name) => {
     try {
@@ -38,6 +39,39 @@ const signup = async (username, password, email, name) => {
                 StatusCodes.INTERNAL_SERVER_ERROR,
                 ReasonPhrases.INTERNAL_SERVER_ERROR,
                 'Reigstration failed. Please try again',
+            );
+        }
+    } catch (err) {
+        throw err;
+    }
+};
+const signUpWithGoogle = async (email, password) => {
+    try {
+        const encodedPassword = await passwordEncoder.encode(password);
+        const defaultUsername = await generateUsername();
+        const defaultName = defaultUsername;
+
+        const savedAccount = await accountService.create(
+            defaultUsername,
+            encodedPassword,
+            email,
+            defaultName,
+        );
+        if (!savedAccount) {
+            throw new AppError(
+                StatusCodes.INTERNAL_SERVER_ERROR,
+                ReasonPhrases.INTERNAL_SERVER_ERROR,
+                'Registration failed. Please try again',
+            );
+        }
+
+        savedAccount.enabled = true;
+        const updatedAccount = await accountService.updateAccount(savedAccount);
+        if (!updatedAccount) {
+            throw new AppError(
+                StatusCodes.INTERNAL_SERVER_ERROR,
+                ReasonPhrases.INTERNAL_SERVER_ERROR,
+                'Registration failed. Please try again',
             );
         }
     } catch (err) {
@@ -196,4 +230,5 @@ module.exports = {
     getVerificationToken,
     validateVerificationToken,
     login,
+    signUpWithGoogle,
 };
