@@ -3,25 +3,40 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
 const loginForm = (req, res) => {
-    const errorMessages = req.flash('error');
-    const hasError = errorMessages.length > 0;
-    if (hasError) {
-        errorMessages[0] = 'Thông tin đăng nhập không đúng';
-    }
     const { loginKey } = req.query;
+    const errorMessages = req.flash('error');
 
     res.render('auth/login', {
         header: false,
-        hasError,
         errorMessage: errorMessages[0],
         loginKey,
     });
 };
-const login = passport.authenticate('myStrategy', {
-    successRedirect: '/',
-    failureRedirect: '/auth/login',
-    failureFlash: true,
-});
+
+const login = (req, res, next) => {
+    passport.authenticate('myStrategy', (err, user, info) => {
+        if (err) {
+            return next(err);
+        }
+
+        if (!user) {
+            req.flash('error', 'Thông tin đăng nhập không đúng');
+            return res.redirect('/auth/login');
+        }
+        if (!user.enabled) {
+            req.flash('error', 'Tài khoản chưa được kích hoạt');
+            return res.redirect('/auth/login');
+        }
+
+        req.logIn(user, (loginErr) => {
+            if (loginErr) {
+                return next(loginErr);
+            }
+
+            return res.redirect('/');
+        });
+    })(req, res, next);
+};
 
 const signupForm = (req, res) => {
     res.render('auth/signup', {
@@ -30,7 +45,6 @@ const signupForm = (req, res) => {
     });
 };
 const signup = async (req, res, next) => {
-    console.log('Go to AuthController: SignUp');
     try {
         const { username, password, email, name } = req.body;
         await authService.signup(username, password, email, name);
