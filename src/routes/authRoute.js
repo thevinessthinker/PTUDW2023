@@ -17,5 +17,6 @@ Router.route('/signup/google').post(
 );
 Router.route('/google').get(authController.loginWithGoogle);
 Router.route('/google/callback').get(authController.loginWithGoogleCallback);
+Router.route('/logout').post(authController.logout);
 
 module.exports = Router;

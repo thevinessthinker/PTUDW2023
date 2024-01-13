@@ -156,6 +156,14 @@ const signUpWithGoogle = async (req, res, next) => {
         next(err);
     }
 };
+const logout = (req, res) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/');
+    });
+};
 
 module.exports = {
     loginForm,
@@ -166,4 +174,5 @@ module.exports = {
     loginWithGoogle,
     loginWithGoogleCallback,
     signUpWithGoogle,
+    logout,
 };
