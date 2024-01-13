@@ -35,6 +35,10 @@ const START_SERVER = () => {
     app.use(flash());
     passport(app);
 
+    app.use((req, res, next) => {
+        res.locals.isAuthenticated = req.isAuthenticated();
+        next();
+    });
     app.use('/', routes);
     app.use(pageNotFoundHandler);
     app.use(errorLogger);
