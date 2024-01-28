@@ -164,3 +164,13 @@ insert into product_types (type_name) values ('Đồ truyền thống');
 
 insert into product_types (type_name) values ('Khác');
 COMMIT;
+-- ----------------------------
+-- Add product_name from product
+-- ----------------------------
+BEGIN;
+INSERT INTO product (product_name) values('Áo Cardigan');
+INSERT into product (product_name) values('Áo khoác Bomber Pilot Oversized màu xám');
+INSERT into product (product_name) values('Áo khoác Bomber Pilot Oversized màu chàm');
+INSERT into product (product_name) values('Áo khoác Bomber Pilot Oversized màu kem');
+INSERT into product (product_name) values('Áo khoác nam ROWAY');
+COMMIT;
