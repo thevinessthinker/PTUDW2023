@@ -162,10 +162,24 @@ insert into product_types (type_name) values ('Đầm/Váy');
 insert into product_types (type_name) values ('Áo len & Cardigan');
 insert into product_types (type_name) values ('Đồ truyền thống');
 
+insert into product_types (type_name) values ('Samsung');
+insert into product_types (type_name) values ('Apple');
+insert into product_types (type_name) values ('Xiaomi');
+insert into product_types (type_name) values ('Nokia');
+insert into product_types (type_name) values ('Oneplus');
+insert into product_types (type_name) values ('Huawei');
+
+insert into product_types (type_name) values ('Điện thoại');
+insert into product_types (type_name) values ('Máy tính bảng');
+insert into product_types (type_name) values ('Pin sạc dự phòng');
+insert into product_types (type_name) values ('Ốp điện thoại');
+insert into product_types (type_name) values ('Sim');
+insert into product_types (type_name) values ('Thẻ nhớ');
+
 insert into product_types (type_name) values ('Khác');
 COMMIT;
 -- ----------------------------
--- Add product_name and price from products
+-- Add product_name and price from products 
 -- ----------------------------
 BEGIN;
 INSERT INTO products (product_name,price) values('Áo Cardigan',159000.00);
@@ -191,6 +205,21 @@ INSERT into products (product_name,price) values('The Color Purple',237000.00);
 INSERT into products (product_name,price) values('The Kite Runner',130000.00);
 INSERT into products (product_name,price) values('The Lovely Bones',193000.00);
 INSERT into products (product_name,price) values('Chúa tể của những chiếc nhẫn',310000.00);
+
+INSERT into products(product_name,price,stock_in_quantity) values('Galaxy S21',10190000.00,10);
+INSERT into products(product_name,price,stock_in_quantity) values('Galaxy Note 20',9690000.00,8);
+INSERT into products(product_name,price,stock_in_quantity) values('Nokia 8.3 5G',8790000.00,17);
+INSERT into products(product_name,price,stock_in_quantity) values('Redmi Note 10 Pro',7580000.00,16);
+INSERT into products(product_name,price,stock_in_quantity) values('OnePlus 9 Pro',9490000.00,12);
+INSERT into products(product_name,price,stock_in_quantity) values('iPhone 13 Pro Max',15090000.00,20);
+INSERT into products(product_name,price,stock_in_quantity) values('iphone 13',15690000.00,24);
+
+INSERT into products(product_name,price,stock_in_quantity,description) values('iPad Pro M2',25490000.00,12,'Apple 11-inch, Wi-fi, 128GB');
+INSERT into products(product_name,price,stock_in_quantity) values('Máy tính bảng Galaxy Pro 11',5890000.00,22);
+INSERT into products(product_name,price,stock_in_quantity, description) values('Máy tính bảng Samsung Galaxy Tab SM-T707',6690000.00,14,'16GB, Wi-Fi+4G');
+INSERT into products(product_name,price,stock_in_quantity,description) values('Máy tính bảng Lenovo TAB 4',7660000.00,25,'8 INCH, Wi-Fi');
+INSERT into products(product_name,price,stock_in_quantity) values('Máy đọc sách Kindle basic 10th',3990000.00,27);
+
 COMMIT;
 -- ----------------------------
 -- Add description and stock_in_quantity from products
