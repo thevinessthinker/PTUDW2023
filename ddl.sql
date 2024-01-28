@@ -134,3 +134,115 @@ CREATE TABLE IF NOT EXISTS verification_tokens (
 );
 
 -- END
+-- ----------------------------
+-- Table structure for Categories
+-- ----------------------------
+BEGIN;
+insert into categories (category_name) values ('Thời trang nữ');
+insert into categories (category_name) values ('Thời trang nam');
+insert into categories (category_name) values ('Đồng hồ');
+insert into categories (category_name) values ('Điện thoại & Phụ kiện');
+insert into categories (category_name) values ('Máy tính & Laptop');
+insert into categories (category_name) values ('Sách');
+COMMIT;
+-- ----------------------------
+-- Table structure for product_types
+-- ----------------------------
+BEGIN;
+insert into product_types (type_name) values ('Áo thun');
+insert into product_types (type_name) values ('Áo khoác');
+insert into product_types (type_name) values ('Áo sơ mi');
+insert into product_types (type_name) values ('Quần dài');
+insert into product_types (type_name) values ('Quần jean');
+insert into product_types (type_name) values ('Quần đùi');
+insert into product_types (type_name) values ('Vớ/Tất');
+
+insert into product_types (type_name) values ('Chân váy');
+insert into product_types (type_name) values ('Đầm/Váy');
+insert into product_types (type_name) values ('Áo len & Cardigan');
+insert into product_types (type_name) values ('Đồ truyền thống');
+
+insert into product_types (type_name) values ('Samsung');
+insert into product_types (type_name) values ('Apple');
+insert into product_types (type_name) values ('Xiaomi');
+insert into product_types (type_name) values ('Nokia');
+insert into product_types (type_name) values ('Oneplus');
+insert into product_types (type_name) values ('Huawei');
+
+insert into product_types (type_name) values ('Điện thoại');
+insert into product_types (type_name) values ('Máy tính bảng');
+insert into product_types (type_name) values ('Pin sạc dự phòng');
+insert into product_types (type_name) values ('Ốp điện thoại');
+insert into product_types (type_name) values ('Sim');
+insert into product_types (type_name) values ('Thẻ nhớ');
+
+insert into product_types (type_name) values ('Khác');
+COMMIT;
+-- ----------------------------
+-- Add product_name and price from products 
+-- ----------------------------
+BEGIN;
+INSERT INTO products (product_name,price) values('Áo Cardigan',159000.00);
+INSERT into products (product_name,price) values('Áo Khoác Bomber Pilot Oversized Màu Xám',199000.00);
+INSERT into products (product_name,price) values('Áo Khoác Bomber Pilot Oversized Màu Chàm',259000.00);
+INSERT into products (product_name,price) values('Áo Khoác Bomber Pilot Oversized Màu Kem',170000.00);
+INSERT into products (product_name,price) values('Áo Khoác ROWAY',399000.00);
+
+INSERT into products (product_name,price) values('Quần Jean Dài Ống Rộng',165000.00);
+INSERT into products (product_name,price) values('Quần Baggy Jean Ống Rộng Có Dây',180000.00);
+INSERT into products (product_name,price) values('Quần Jean Light Gray Smoke',257000.00);
+INSERT into products (product_name,price) values('Quần Jean Ống Rộng Màu Bạc Có Viền Line',359000.00);
+INSERT into products (product_name,price) values('Quần Jean Túi Hộp',499000.00);
+
+INSERT into products (product_name,price) values('Harry Potter Và Hòn Đá Phù Thủy',120000.00);
+INSERT into products (product_name,price) values('Price And Prejudice',118000.00);
+INSERT into products (product_name,price) values('The Great Gatsby',339000.00);
+INSERT into products (product_name,price) values('The Little Prince',216000.00);
+INSERT into products (product_name,price) values('The Alchemist',255000.00);
+INSERT into products (product_name,price) values('The Book Thief',352000.00);
+INSERT into products (product_name,price) values('The Call Of The Wild',434000.00);
+INSERT into products (product_name,price) values('The Color Purple',237000.00);
+INSERT into products (product_name,price) values('The Kite Runner',130000.00);
+INSERT into products (product_name,price) values('The Lovely Bones',193000.00);
+INSERT into products (product_name,price) values('Chúa tể của những chiếc nhẫn',310000.00);
+
+INSERT into products(product_name,price,stock_in_quantity) values('Galaxy S21',10190000.00,10);
+INSERT into products(product_name,price,stock_in_quantity) values('Galaxy Note 20',9690000.00,8);
+INSERT into products(product_name,price,stock_in_quantity) values('Nokia 8.3 5G',8790000.00,17);
+INSERT into products(product_name,price,stock_in_quantity) values('Redmi Note 10 Pro',7580000.00,16);
+INSERT into products(product_name,price,stock_in_quantity) values('OnePlus 9 Pro',9490000.00,12);
+INSERT into products(product_name,price,stock_in_quantity) values('iPhone 13 Pro Max',15090000.00,20);
+INSERT into products(product_name,price,stock_in_quantity) values('iphone 13',15690000.00,24);
+
+INSERT into products(product_name,price,stock_in_quantity,description) values('iPad Pro M2',25490000.00,12,'Apple 11-inch, Wi-fi, 128GB');
+INSERT into products(product_name,price,stock_in_quantity) values('Máy tính bảng Galaxy Pro 11',5890000.00,22);
+INSERT into products(product_name,price,stock_in_quantity, description) values('Máy tính bảng Samsung Galaxy Tab SM-T707',6690000.00,14,'16GB, Wi-Fi+4G');
+INSERT into products(product_name,price,stock_in_quantity,description) values('Máy tính bảng Lenovo TAB 4',7660000.00,25,'8 INCH, Wi-Fi');
+INSERT into products(product_name,price,stock_in_quantity) values('Máy đọc sách Kindle basic 10th',3990000.00,27);
+
+COMMIT;
+-- ----------------------------
+-- Add description and stock_in_quantity from products
+-- ----------------------------
+UPDATE products
+set description='Áo khoác chất vải kim tuyến', stock_in_quantity=11
+where id=2;
+UPDATE products SET stock_in_quantity=5 where id=3;
+UPDATE products SET stock_in_quantity=7 where id=4;
+UPDATE products SET stock_in_quantity=6 where id=5;
+UPDATE products SET stock_in_quantity=6 where id=6;
+UPDATE products SET stock_in_quantity=8 where id=7;
+UPDATE products SET stock_in_quantity=0 where id=8;
+UPDATE products SET stock_in_quantity=12  where id=9;
+UPDATE products SET stock_in_quantity=15  where id=10;
+UPDATE products SET stock_in_quantity=9  where id=11;
+UPDATE products SET stock_in_quantity=7  where id=12;
+UPDATE products SET stock_in_quantity=13  where id=13;
+UPDATE products SET stock_in_quantity=20 where id=14;
+UPDATE products SET stock_in_quantity=11  where id=15;
+UPDATE products SET stock_in_quantity=18  where id=16;
+UPDATE products SET stock_in_quantity=21  where id=17;
+UPDATE products SET stock_in_quantity=14  where id=18;
+UPDATE products SET stock_in_quantity=8  where id=19;
+UPDATE products SET stock_in_quantity=7  where id=20;
+UPDATE products SET stock_in_quantity=19  where id=21;
