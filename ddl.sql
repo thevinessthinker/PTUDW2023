@@ -169,8 +169,26 @@ COMMIT;
 -- ----------------------------
 BEGIN;
 INSERT INTO product (product_name) values('Áo Cardigan');
-INSERT into product (product_name) values('Áo khoác Bomber Pilot Oversized màu xám');
-INSERT into product (product_name) values('Áo khoác Bomber Pilot Oversized màu chàm');
-INSERT into product (product_name) values('Áo khoác Bomber Pilot Oversized màu kem');
-INSERT into product (product_name) values('Áo khoác nam ROWAY');
+INSERT into product (product_name) values('Áo Khoác Bomber Pilot Oversized Màu Xám');
+INSERT into product (product_name) values('Áo Khoác Bomber Pilot Oversized Màu Chàm');
+INSERT into product (product_name) values('Áo Khoác Bomber Pilot Oversized Màu Kem');
+INSERT into product (product_name) values('Áo Khoác ROWAY');
+
+INSERT into product (product_name) values('Quần Jean Dài Ống Rộng');
+INSERT into product (product_name) values('Quần Baggy Jean Ống Rộng Có Dây');
+INSERT into product (product_name) values('Quần Jean Light Gray Smoke');
+INSERT into product (product_name) values('Quần Jean Ống Rộng Màu Bạc Có Viền Line');
+INSERT into product (product_name) values('Quần Jean Túi Hộp');
+
+INSERT into product (product_name) values('Harry Potter Và Hòn Đá Phù Thủy');
+INSERT into product (product_name) values('Price And Prejudice');
+INSERT into product (product_name) values('The Great Gatsby');
+INSERT into product (product_name) values('The Little Prince');
+INSERT into product (product_name) values('The Alchemist');
+INSERT into product (product_name) values('The Book Thief');
+INSERT into product (product_name) values('The Call Of The Wild');
+INSERT into product (product_name) values('The Color Purple');
+INSERT into product (product_name) values('The Kite Runner');
+INSERT into product (product_name) values('The Lovely Bones');
+INSERT into product (product_name) values('Chúa tể của những chiếc nhẫn');
 COMMIT;
