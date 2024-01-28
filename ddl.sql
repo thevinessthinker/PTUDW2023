@@ -168,27 +168,27 @@ COMMIT;
 -- Add product_name from product
 -- ----------------------------
 BEGIN;
-INSERT INTO products (product_name) values('Áo Cardigan');
-INSERT into products (product_name) values('Áo Khoác Bomber Pilot Oversized Màu Xám');
-INSERT into products (product_name) values('Áo Khoác Bomber Pilot Oversized Màu Chàm');
-INSERT into products (product_name) values('Áo Khoác Bomber Pilot Oversized Màu Kem');
-INSERT into products (product_name) values('Áo Khoác ROWAY');
+INSERT INTO products (product_name,price) values('Áo Cardigan',159000.00);
+INSERT into products (product_name,price) values('Áo Khoác Bomber Pilot Oversized Màu Xám',199000.00);
+INSERT into products (product_name,price) values('Áo Khoác Bomber Pilot Oversized Màu Chàm',259000.00);
+INSERT into products (product_name,price) values('Áo Khoác Bomber Pilot Oversized Màu Kem',170000.00);
+INSERT into products (product_name,price) values('Áo Khoác ROWAY',399000.00);
 
-INSERT into products (product_name) values('Quần Jean Dài Ống Rộng');
-INSERT into products (product_name) values('Quần Baggy Jean Ống Rộng Có Dây');
-INSERT into products (product_name) values('Quần Jean Light Gray Smoke');
-INSERT into products (product_name) values('Quần Jean Ống Rộng Màu Bạc Có Viền Line');
-INSERT into products (product_name) values('Quần Jean Túi Hộp');
+INSERT into products (product_name,price) values('Quần Jean Dài Ống Rộng',165000.00);
+INSERT into products (product_name,price) values('Quần Baggy Jean Ống Rộng Có Dây',180000.00);
+INSERT into products (product_name,price) values('Quần Jean Light Gray Smoke',257000.00);
+INSERT into products (product_name,price) values('Quần Jean Ống Rộng Màu Bạc Có Viền Line',359000.00);
+INSERT into products (product_name,price) values('Quần Jean Túi Hộp',499000.00);
 
-INSERT into products (product_name) values('Harry Potter Và Hòn Đá Phù Thủy');
-INSERT into products (product_name) values('Price And Prejudice');
-INSERT into products (product_name) values('The Great Gatsby');
-INSERT into products (product_name) values('The Little Prince');
-INSERT into products (product_name) values('The Alchemist');
-INSERT into products (product_name) values('The Book Thief');
-INSERT into products (product_name) values('The Call Of The Wild');
-INSERT into products (product_name) values('The Color Purple');
-INSERT into products (product_name) values('The Kite Runner');
-INSERT into products (product_name) values('The Lovely Bones');
-INSERT into products (product_name) values('Chúa tể của những chiếc nhẫn');
+INSERT into products (product_name,price) values('Harry Potter Và Hòn Đá Phù Thủy',120000.00);
+INSERT into products (product_name,price) values('Price And Prejudice',118000.00);
+INSERT into products (product_name,price) values('The Great Gatsby',339000.00);
+INSERT into products (product_name,price) values('The Little Prince',216000.00);
+INSERT into products (product_name,price) values('The Alchemist',255000.00);
+INSERT into products (product_name,price) values('The Book Thief',352000.00);
+INSERT into products (product_name,price) values('The Call Of The Wild',434000.00);
+INSERT into products (product_name,price) values('The Color Purple',237000.00);
+INSERT into products (product_name,price) values('The Kite Runner',130000.00);
+INSERT into products (product_name,price) values('The Lovely Bones',193000.00);
+INSERT into products (product_name,price) values('Chúa tể của những chiếc nhẫn',310000.00);
 COMMIT;
