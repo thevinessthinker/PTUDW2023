@@ -165,7 +165,7 @@ insert into product_types (type_name) values ('Đồ truyền thống');
 insert into product_types (type_name) values ('Khác');
 COMMIT;
 -- ----------------------------
--- Add product_name from product
+-- Add product_name and price from products
 -- ----------------------------
 BEGIN;
 INSERT INTO products (product_name,price) values('Áo Cardigan',159000.00);
@@ -192,3 +192,28 @@ INSERT into products (product_name,price) values('The Kite Runner',130000.00);
 INSERT into products (product_name,price) values('The Lovely Bones',193000.00);
 INSERT into products (product_name,price) values('Chúa tể của những chiếc nhẫn',310000.00);
 COMMIT;
+-- ----------------------------
+-- Add description and stock_in_quantity from products
+-- ----------------------------
+UPDATE products
+set description='Áo khoác chất vải kim tuyến', stock_in_quantity=11
+where id=2;
+UPDATE products SET stock_in_quantity=5 where id=3;
+UPDATE products SET stock_in_quantity=7 where id=4;
+UPDATE products SET stock_in_quantity=6 where id=5;
+UPDATE products SET stock_in_quantity=6 where id=6;
+UPDATE products SET stock_in_quantity=8 where id=7;
+UPDATE products SET stock_in_quantity=0 where id=8;
+UPDATE products SET stock_in_quantity=12  where id=9;
+UPDATE products SET stock_in_quantity=15  where id=10;
+UPDATE products SET stock_in_quantity=9  where id=11;
+UPDATE products SET stock_in_quantity=7  where id=12;
+UPDATE products SET stock_in_quantity=13  where id=13;
+UPDATE products SET stock_in_quantity=20 where id=14;
+UPDATE products SET stock_in_quantity=11  where id=15;
+UPDATE products SET stock_in_quantity=18  where id=16;
+UPDATE products SET stock_in_quantity=21  where id=17;
+UPDATE products SET stock_in_quantity=14  where id=18;
+UPDATE products SET stock_in_quantity=8  where id=19;
+UPDATE products SET stock_in_quantity=7  where id=20;
+UPDATE products SET stock_in_quantity=19  where id=21;
